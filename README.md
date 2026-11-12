@@ -32,7 +32,7 @@ The workflow uses two actions:
 
 ## What you get
 
-Pictures come out of the `.mdz` files into one `images/` folder, each named after its contents and stored once. Each page gets its title and description from its `.mdz`, a canonical address, and Open Graph tags for link previews. The action also writes `sitemap.xml`, with each page's last-changed date from git, and `robots.txt`. `pages/404.mdz` becomes the page GitHub Pages shows for addresses that don't exist.
+Pictures come out of the `.mdz` files into one `images/` folder, each named after its contents and stored once. Each page gets its title and description from its `.mdz`, a canonical address, and Open Graph tags for link previews. A page whose `.mdz` has a cover picture (in MDZip Studio or VS Code, right-click a picture in the file list and choose **Set as Cover Image**) shows it as its link preview; use a PNG or JPEG of about 1200 × 630 pixels, since previews don't show SVG. The action also writes `sitemap.xml`, with each page's last-changed date from git, and `robots.txt`. `pages/404.mdz` becomes the page GitHub Pages shows for addresses that don't exist.
 
 Search engines only read `robots.txt` at the root of a domain, so on a `github.io/<repository>/` address it's ignored. Submit the sitemap in Google Search Console instead, or use a custom domain.
 

@@ -24,7 +24,14 @@ $endif$
 $if(description)$
   <meta property="og:description" content="$description$">
 $endif$
+$if(cover-url)$
+  <!-- The page's cover picture (its manifest "cover"), for link previews. -->
+  <meta property="og:image" content="$cover-url$">
+  <meta property="og:image:alt" content="$pagetitle$">
+  <meta name="twitter:card" content="summary_large_image">
+$else$
   <meta name="twitter:card" content="summary">
+$endif$
   <link rel="icon" href="site/favicon.svg">
 $if(author)$
   <meta name="author" content="$for(author)$$author$$sep$, $endfor$">
