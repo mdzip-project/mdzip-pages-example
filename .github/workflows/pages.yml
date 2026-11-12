@@ -40,8 +40,9 @@ jobs:
           # Where the site is published: for the sitemap, robots.txt and
           # each page's canonical address.
           site-url: https://mdzip-project.github.io/mdzip-pages-example/
-          # Each page is put into the template, and carries its own
-          # pictures and styles. MathML shows formulas without a script.
+          # Each page is put into the template, with the style sheet and icon
+          # built in; pictures go to images/ (the action's default). MathML shows
+          # formulas without a script.
           args: >-
             --standalone --embed-resources --wrap=none --math-method=mathml
             --template=site/template.html --css=site/style.css
