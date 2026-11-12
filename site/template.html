@@ -7,6 +7,25 @@
 $if(description)$
   <meta name="description" content="$description$">
 $endif$
+$if(page-url)$
+  <link rel="canonical" href="$page-url$" data-external="1">
+  <meta property="og:url" content="$page-url$">
+$else$
+$if(site-url)$
+  <!-- A page with no address of its own (404.html) can be shown at any
+       address, so its links are made relative to the site root. -->
+  <base href="$site-url$">
+  <meta name="robots" content="noindex">
+$endif$
+$endif$
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MDZip pages example">
+  <meta property="og:title" content="$pagetitle$">
+$if(description)$
+  <meta property="og:description" content="$description$">
+$endif$
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" href="site/favicon.svg">
 $if(author)$
   <meta name="author" content="$for(author)$$author$$sep$, $endfor$">
 $endif$

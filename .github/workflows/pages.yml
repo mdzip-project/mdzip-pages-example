@@ -18,6 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # full history, for each page's last-changed date in the sitemap
 
       - name: Install mdz
         uses: mdzip-project/setup-mdz@v1
@@ -35,6 +37,9 @@ jobs:
         with:
           input: pages
           output: _site
+          # Where the site is published: for the sitemap, robots.txt and
+          # each page's canonical address.
+          site-url: https://mdzip-project.github.io/mdzip-pages-example/
           # Each page is put into the template, and carries its own
           # pictures and styles. MathML shows formulas without a script.
           args: >-
