@@ -19,6 +19,9 @@
   }
   /* Diagrams are drawn on white: keep them readable on a dark page. */
   main img { background: #fff; border-radius: 6px; }
+  /* Pandoc's code colors are made for a light background: flip the block. */
+  div.sourceCode { filter: invert(1) hue-rotate(180deg); }
+  div.sourceCode pre { background: #e3e3e3; color: #1a1a1a; }
 }
 
 * { box-sizing: border-box; }
@@ -80,6 +83,13 @@ code {
 }
 pre { background: var(--soft); padding: 1rem; border-radius: 6px; overflow-x: auto; }
 pre code { padding: 0; background: none; }
+.mermaid-diagram { margin: 1.5rem 0; text-align: center; }
+
+input[type="checkbox"] { margin-right: 0.4em; }
+ul.task-list { list-style: none; padding-left: 1.2em; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
+.footnotes { font-size: 0.9rem; color: var(--muted); }
+math[display="block"] { margin: 1rem 0; overflow-x: auto; }
 
 table { border-collapse: collapse; width: 100%; display: block; overflow-x: auto; }
 th, td { text-align: left; padding: 0.5rem 0.75rem; border-bottom: 1px solid var(--line); vertical-align: top; }

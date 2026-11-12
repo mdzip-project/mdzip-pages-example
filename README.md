@@ -1,6 +1,6 @@
 # MDZip pages example
 
-A website whose pages are MDZip (`.mdz`) files: each page is one file holding its Markdown and its pictures. On every push, GitHub checks the pages, converts them to HTML with [Pandoc](https://pandoc.org) and publishes them on GitHub Pages. There's no website code in the repository, only pages, a template and a style sheet.
+A website whose pages are MDZip (`.mdz`) files: each page is one file holding its Markdown and its pictures. On every push, GitHub checks the pages, converts them to HTML with [Pandoc](https://pandoc.org) and publishes them on GitHub Pages. There's no build code in the repository, only pages, a template and a style sheet.
 
 **See it live:** https://mdzip-project.github.io/mdzip-pages-example/
 

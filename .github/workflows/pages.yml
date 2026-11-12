@@ -36,9 +36,9 @@ jobs:
           input: pages
           output: _site
           # Each page is put into the template, and carries its own
-          # pictures and styles.
+          # pictures and styles. MathML shows formulas without a script.
           args: >-
-            --standalone --embed-resources --wrap=none
+            --standalone --embed-resources --wrap=none --math-method=mathml
             --template=site/template.html --css=site/style.css
 
       - uses: actions/upload-pages-artifact@v5

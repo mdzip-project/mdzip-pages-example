@@ -10,6 +10,14 @@ $endif$
 $if(author)$
   <meta name="author" content="$for(author)$$author$$sep$, $endfor$">
 $endif$
+$if(highlighting-css)$
+  <style>
+$highlighting-css$
+  </style>
+$endif$
+$if(math)$
+  $math$
+$endif$
 $for(css)$
   <link rel="stylesheet" href="$css$">
 $endfor$
@@ -20,6 +28,7 @@ $endfor$
     <nav>
       <a href="index.html">Home</a>
       <a href="how-it-works.html">How it works</a>
+      <a href="features.html">What a page can show</a>
       <a href="add-a-page.html">Add a page</a>
     </nav>
   </header>
@@ -29,5 +38,24 @@ $body$
   <footer class="site-footer">
     Made of <a href="https://mdzip.org">MDZip</a> (<code>.mdz</code>) pages, converted with <a href="https://pandoc.org">Pandoc</a>.
   </footer>
+  <script type="module">
+    // Mermaid diagrams: Pandoc turns a ```mermaid code block into <pre class="... mermaid">.
+    // Load Mermaid only on pages that have one. Each block is swapped for a plain
+    // <div> holding its text, away from the code styles, and drawn there.
+    const blocks = [...document.querySelectorAll('pre.mermaid')];
+    if (blocks.length) {
+      const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs');
+      const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+      const diagrams = blocks.map((pre) => {
+        const div = document.createElement('div');
+        div.className = 'mermaid-diagram';
+        div.textContent = pre.textContent;
+        (pre.closest('div.sourceCode') ?? pre).replaceWith(div);
+        return div;
+      });
+      mermaid.initialize({ startOnLoad: false, theme: dark ? 'dark' : 'neutral' });
+      await mermaid.run({ nodes: diagrams });
+    }
+  </script>
 </body>
 </html>
