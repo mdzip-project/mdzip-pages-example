@@ -1,0 +1,61 @@
+name: Publish site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install mdz
+        uses: mdzip-project/setup-mdz@v1
+        with:
+          version: 2.1.0
+
+      - name: Check the pages
+        shell: bash
+        run: |
+          shopt -s globstar nullglob
+          for page in pages/**/*.mdz; do mdz validate "$page"; done
+
+      - name: Convert the pages to HTML
+        uses: mdzip-project/mdzip-pandoc@v0
+        with:
+          input: pages
+          output: _site
+          # Each page is put into the template, and carries its own
+          # pictures and styles.
+          args: >-
+            --standalone --embed-resources --wrap=none
+            --template=site/template.html --css=site/style.css
+
+      - uses: actions/upload-pages-artifact@v5
+        if: github.event_name != 'pull_request'
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
